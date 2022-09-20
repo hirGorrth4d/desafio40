@@ -6,12 +6,22 @@ const Config = require('../config');
 const {signupF, loginF} = require('./auth');
 const mainRouter = require('../routes');
 const Logger = require('./logger');
+const cors = require('cors');
 
 const app = express()
 
 app.use(express.json())
 
 const ttlSeconds = 1800;
+
+const corsOptions = {
+    origin: ['http://localhost:5000'],
+    optionSuccessStatus: 200,
+    methods: 'GET, POST'
+}
+
+app.use(cors(corsOptions))
+
 
 const StoreOptions = {
     store: MongoStore.create({
