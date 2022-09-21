@@ -7,7 +7,7 @@ const {signupF, loginF} = require('./auth');
 const mainRouter = require('../routes');
 const Logger = require('./logger');
 const cors = require('cors');
-
+const http = require('http');
 const app = express()
 
 app.use(express.json())
@@ -58,4 +58,5 @@ app.use((err, req, res, next) => {
     res.status(status).send({msg, stack})
 })
 
-module.exports = app;
+const HTTPServer = http.createServer(app)
+module.exports = HTTPServer;
